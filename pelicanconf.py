@@ -12,7 +12,7 @@ TIMEZONE = 'America/Chicago'
 
 DEFAULT_LANG = 'English'
 
-#THEME= 'themes/flex'
+THEME= 'themes/flex'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
