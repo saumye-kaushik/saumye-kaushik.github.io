@@ -27,13 +27,13 @@ AUTHOR_FEED_RSS = None
 SOCIAL = (('LinkedIn', 'https://www.linkedin.com/in/saumye-kaushik/'),
           ('Github', 'https://github.com/saumye-kaushik'),)
 		  
-DEFAULT_DATE_FORMAT = ('%a %d %B %Y')
+#DEFAULT_DATE_FORMAT = ('%a %d %B %Y')
 
 DEFAULT_PAGINATION = 10
 
 MARKUP = ('md', 'ipynb')
 
-PLUGIN_PATH = './plugins'
+PLUGIN_PATHS = ['./plugins']
 PLUGINS = ['ipynb.markup']
 
 # Uncomment following line if you want document-relative URLs when developing
