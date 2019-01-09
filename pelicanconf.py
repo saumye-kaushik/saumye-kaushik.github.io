@@ -24,10 +24,10 @@ AUTHOR_FEED_RSS = None
 # Blogroll
 
 # Social widget
-#SOCIAL = (('LinkedIn', 'https://www.linkedin.com/in/saumye-kaushik/'),
-#          ('Github', 'https://github.com/saumye-kaushik'),)
+SOCIAL = (('LinkedIn', 'https://www.linkedin.com/in/saumye-kaushik/'),
+          ('Github', 'https://github.com/saumye-kaushik'),)
 		  
-#DEFAULT_DATE_FORMAT = ('%a %d %B %Y')
+DEFAULT_DATE_FORMAT = ('%a %d %B %Y')
 
 DEFAULT_PAGINATION = 10
 
