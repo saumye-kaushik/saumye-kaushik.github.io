@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Saumye's Blog - posts</title><link href="https://saumye-kaushik.github.io/" rel="alternate"></link><link href="https://saumye-kaushik.github.io/feeds/posts.atom.xml" rel="self"></link><id>https://saumye-kaushik.github.io/</id><updated>2019-01-08T22:00:00-06:00</updated><entry><title>Sentiment Analysis of Reviews for Amazon Products</title><link href="https://saumye-kaushik.github.io/sentiment-analysis-amazon-products.html" rel="alternate"></link><published>2019-01-08T22:00:00-06:00</published><updated>2019-01-08T22:00:00-06:00</updated><author><name>Saumye Kaushik</name></author><id>tag:saumye-kaushik.github.io,2019-01-08:/sentiment-analysis-amazon-products.html</id><summary type="html">&lt;p&gt;Sentiment Analysis of Reviews.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Saumye's Blog - Project Details</title><link href="https://saumye-kaushik.github.io/" rel="alternate"></link><link href="https://saumye-kaushik.github.io/feeds/project-details.atom.xml" rel="self"></link><id>https://saumye-kaushik.github.io/</id><updated>2019-01-08T22:00:00-06:00</updated><entry><title>Sentiment Analysis of Reviews for Amazon Products</title><link href="https://saumye-kaushik.github.io/sentiment-analysis-amazon-products.html" rel="alternate"></link><published>2019-01-08T22:00:00-06:00</published><updated>2019-01-08T22:00:00-06:00</updated><author><name>Saumye Kaushik</name></author><id>tag:saumye-kaushik.github.io,2019-01-08:/sentiment-analysis-amazon-products.html</id><summary type="html">
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In this project, I will be analysing reviews that were given to Amazon Products. This dataset contains around 34000 reviews of various Amazon products such as Fire tablet, Fire stick. Along with it, there is also the rating given by the user and if the user recommends this product or not.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -1147,13 +1151,25 @@ h6:hover .anchor-link {
 .ansi-white-intense-bg { background-color: #A1A6B2; }
 
 .ansi-bold { font-weight: bold; }
-&lt;/style&gt;
+&lt;/style&gt;&lt;body&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Dataset at: &lt;a href="https://www.kaggle.com/datafiniti/consumer-reviews-of-amazon-products/kernels"&gt;https://www.kaggle.com/datafiniti/consumer-reviews-of-amazon-products/kernels&lt;/a&gt;
-Aim: Use the textual reviews of Amazon Products to predict ratings, while experimenting various parts of textual analysis.&lt;/p&gt;
+&lt;p&gt;In this project, I will be analysing reviews that were given to Amazon Products. This dataset contains around 34000 reviews of various Amazon products such as Fire tablet, Fire stick. Along with it, there is also the rating given by the user and if the user recommends this product or not.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Aim&lt;/strong&gt;: Use the textual reviews of Amazon Products to predict ratings, while experimenting various parts of textual analysis.&lt;br&gt;
+I will be using the text column in the dataset to predict the rating given by the user, whether it is positive or negative. This is of course under the assumption that the review given by the user matches the rating given. Hopefully, the reviews here are not something like this one!&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="images/The-Contradictory.png" alt="Great review but one star?!" title="Contradictory review" /&gt; &lt;br&gt;
+So, before I start, the idea is to change the ratings from numbers to positive-negative or use the doRecommend flag and predict this rating using the reviews for each product.&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dataset&lt;/strong&gt;: &lt;a href="https://www.kaggle.com/datafiniti/consumer-reviews-of-amazon-products/kernels"&gt;https://www.kaggle.com/datafiniti/consumer-reviews-of-amazon-products/kernels&lt;/a&gt; &lt;br&gt;
+So, let's start!&lt;/p&gt;
 
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Import-all-libraries-that-would-be-used"&gt;Import all libraries that would be used&lt;a class="anchor-link" href="#Import-all-libraries-that-would-be-used"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1172,7 +1188,6 @@ Aim: Use the textual reviews of Amazon Products to predict ratings, while experi
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
 &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;matplotlib&lt;/span&gt; inline
 
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;bz2&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;string&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;nltk&lt;/span&gt;
@@ -1195,7 +1210,7 @@ Aim: Use the textual reviews of Amazon Products to predict ratings, while experi
 &lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[2]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;reviews&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;../1429_1.csv&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;reviews&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1429_1.csv&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;reviews&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;asins&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;brand&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;categories&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;keys&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;manufacturer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;date&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;dateAdded&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;dateSeen&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;didPurchase&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;doRecommend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;numHelpful&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sourceURLs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;userCity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;userProvince&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;reviews&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1411,7 +1426,7 @@ Aim: Use the textual reviews of Amazon Products to predict ratings, while experi
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[33]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[3]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;reviews&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;dateSeen&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sourceURLs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;userCity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;userProvince&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;inplace&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1506,7 +1521,7 @@ dtype: int64&lt;/pre&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Create a new dataframe with the important columns.&lt;/p&gt;
+&lt;h4 id="The-top-5-most-reviewed-items-in-the-dataset"&gt;The top 5 most reviewed items in the dataset&lt;a class="anchor-link" href="#The-top-5-most-reviewed-items-in-the-dataset"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Looks like Fire tablet is way ahead of the rest here.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1514,6 +1529,52 @@ dtype: int64&lt;/pre&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;reviews_nna&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nlargest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;Fire Tablet, 7 Display, Wi-Fi, 8 GB - Includes Special Offers, Magenta                                       10966
+Echo (White),,,\r\nEcho (White),,,                                                                            3309
+Amazon Kindle Paperwhite - eBook reader - 4 GB - 6 monochrome Paperwhite - touchscreen - Wi-Fi - black,,,     3176
+All-New Fire HD 8 Tablet, 8 HD Display, Wi-Fi, 16 GB - Includes Special Offers, Magenta                       2814
+Amazon Fire Tv,,,\r\nAmazon Fire Tv,,,                                                                        2527
+Name: name, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Create a new dataframe with the important columns. I am taking &lt;em&gt;asins&lt;/em&gt; just to distinguish between the products.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[7]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;reviews_nna&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;asins&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;doRecommend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
@@ -1530,7 +1591,7 @@ dtype: int64&lt;/pre&gt;
 
 &lt;div class="output_area"&gt;
 
-    &lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+    &lt;div class="prompt output_prompt"&gt;Out[7]:&lt;/div&gt;
 
 
 
@@ -1622,7 +1683,7 @@ dtype: int64&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[7]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[8]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;catplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;doRecommend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;kind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;count&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1638,13 +1699,13 @@ dtype: int64&lt;/pre&gt;
 
 &lt;div class="output_area"&gt;
 
-    &lt;div class="prompt output_prompt"&gt;Out[7]:&lt;/div&gt;
+    &lt;div class="prompt output_prompt"&gt;Out[8]:&lt;/div&gt;
 
 
 
 
 &lt;div class="output_text output_subarea output_execute_result"&gt;
-&lt;pre&gt;&amp;lt;seaborn.axisgrid.FacetGrid at 0x232e24a6ba8&amp;gt;&lt;/pre&gt;
+&lt;pre&gt;&amp;lt;seaborn.axisgrid.FacetGrid at 0x1fc2675e438&amp;gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -1668,9 +1729,361 @@ dtype: int64&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;doRecommend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;3.0    532
+1.0    331
+2.0    324
+4.0    134
+5.0     63
+Name: rating, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;strong&gt;Interesting!&lt;/strong&gt; Looks like some people rate a product highly but do not recommend it.&lt;br&gt;
+Let's peek at the reviews that these products have been given.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_option&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;display.max_colwidth&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;doRecommend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mf"&gt;5.0&lt;/span&gt;&lt;span class="p"&gt;)][[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;doRecommend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[10]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;doRecommend&lt;/th&gt;
+      &lt;th&gt;rating&lt;/th&gt;
+      &lt;th&gt;text&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;344&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;I purchased this on Black Friday because I could pass on the price. The tablet works great for basic internet needs and great for shopping on Amazon. If I were to purchase another Android Tablet, I will look for something with a little more power since this tablet slows when multi-tasking.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1324&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;I pulled the trigger on the fire tablet knowing the I would have to install the google play store separately. with some work this could be the most bang for your buck for an android tablet.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1646&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;Great beginner tablet for all ages. Easy to use by all ages.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2682&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;I bought this tablet for my 13 yr. old God-child and she loves it. This was her Christmas present.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3568&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;This make an excellent ebook reader. Don't expect much from this device except to read basic ebooks. The good thing is it's cheap and good to read in the sun.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3878&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;this is a good one, easy to read and browsethis is a good one, easy to read and browse&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;5283&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;This tablet I can read all the letters and words on so it is pretty good. I hate the ads on the lock screen the goverment doesnt need to know when I READ MY DIGITAL BOOKS&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;6406&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;I have bought 8 of these. They are perfect for kids&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;7092&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;It was easy to use, very nice picture and the quality is out standing, it is a little hard to hold but if you put it on the table it is a lot easier to use I would like to buy another one some day maybe upgrade to a different kind but overall it is worth the money that you pay for it&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;7224&lt;/th&gt;
+      &lt;td&gt;False&lt;/td&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;We bought it last year Black Friday for us and now we bought it as a gift because it's good for kids&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;So, taking a look at just 10 of these and you can tell that these seem like false flags. It seems that the reviews are indeed positive, so they match the ratings &lt;strong&gt;BUT&lt;/strong&gt; the recommendation does not match that. &lt;br&gt;
+Now, let's look at the products recommended and their split by ratings.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[11]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;doRecommend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[11]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;5.0    23326
+4.0    8335 
+3.0    938  
+2.0    58   
+1.0    25   
+Name: rating, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;And now the text for these recommended products with bad ratings.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_option&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;display.max_colwidth&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;doRecommend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;)][[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;doRecommend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;doRecommend&lt;/th&gt;
+      &lt;th&gt;rating&lt;/th&gt;
+      &lt;th&gt;text&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;633&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;We bought this earlier on line from another vendor and it was never delivered. Best Buy was great.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4927&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;I got 6 of them they didn't have google plus me no like&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;5031&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;I love using it to read and surf the internet. It is also very handy.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;5044&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;I totally love the Kindle Fire tablets purchased for my grandkids. My sister purchased one in our hometown for my mother. She is equally happy. My granddaughter and grandson spend their wind down time in the evening on the tablets playing their favorite games. In addition, they want a dog and conduct research for the type of dog that the would like. Overall, the tablets are easy to use and provides technology for them when they visit every other weekend. I am pleased.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;5555&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;i have bought at least 6 people this kindle it is perfect......&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;7637&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;Tablet was working perfectly. Now the charging port isn't working. Can't charge the tablet. Will be sending back.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;8068&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;Great easy to use great pictures great price. Awesome&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;8579&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;I have yet to use it as I do not know how. I need help!&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;8949&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;I bought this to use with a particular app but wasn't able to install them so I returned the tablets.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;9034&lt;/th&gt;
+      &lt;td&gt;True&lt;/td&gt;
+      &lt;td&gt;1.0&lt;/td&gt;
+      &lt;td&gt;I bought this tablet on black Friday and went home to test it out and it was very slow and not worth the money&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Well, this makes things a bit confusing. The texts here either dont match the &lt;em&gt;doRecommend&lt;/em&gt; or they do not match the &lt;em&gt;rating&lt;/em&gt;. &lt;br&gt;
+So, going just by this observation, it makes sense to use the &lt;em&gt;ratings&lt;/em&gt; as a target variable instead of the &lt;em&gt;doRecommend&lt;/em&gt; variable, since we would probably have a huge number of contradictory reviews. There will be a bunch of false flags, just like in the reviews above, but that is something we cannot really do anything about, unless I read through each one of the 34000 reviews and label them myself...&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2&gt;Stemming &lt;br&gt;&lt;/h2&gt;
+&lt;p&gt;In Natural language writing, a word is written is several forms due to grammatical purposes. For example, the sentence- I am going to school can be written as I had gone to the school or I have been going to the school depending on the context. For processing in models, it makes sense to convert these types of sentences into a single format. This is where &lt;strong&gt;stemming&lt;/strong&gt; and &lt;strong&gt;lemmatization&lt;/strong&gt; come in. &lt;br&gt;
+Stemming and lemmatization is used to reduce a word to its root form or a common base form. So, &lt;em&gt;am&lt;/em&gt;, &lt;em&gt;are&lt;/em&gt;, &lt;em&gt;is&lt;/em&gt; converts to &lt;em&gt;be&lt;/em&gt;; &lt;em&gt;going&lt;/em&gt;, &lt;em&gt;gone&lt;/em&gt; converts to go and so on. The difference between stemming and lemmatization is the output of this conversion. Lemmatization reduces a word to its equivalent dictionary word, which might actually not be the case with stemming. &lt;em&gt;Amuse&lt;/em&gt; stems to &lt;em&gt;amus&lt;/em&gt; whereas its lemma is &lt;em&gt;amuse&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;In this part, I check two types of stemming methods that are available- Porter and Snowball. So, passed a review to the functions created to generate stemmed equivalents and see the results.
     According to the outputs, the Snowball stemming seems to generate more readable output, while also cleaning up the texts( lower-case and removing special characters). So, I use the Snowball stemming for further use.&lt;/p&gt;
 
@@ -1679,7 +2092,7 @@ dtype: int64&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[8]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[13]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;nltk&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SnowballStemmer&lt;/span&gt;
@@ -1745,7 +2158,7 @@ Snowball Stem- i ve fire hd 8 two week i love . this tablet great value.w prime 
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[9]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[14]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;text_stem&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sentenceSnowballStem&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1782,15 +2195,39 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now, with the stemmed reviews, it is required to create vectorized versions of the text. There are two methods we can go with, count vectorization and TF-IDF vectorization. In this part, I generate the TF-IDF version of the whole review dataset to understand the method and see the output that is generated by it. 
-Since TF-IDF and Count vectorization both use similar concepts and generate similar output format, I decided to check the TF-IDF version.&lt;/p&gt;
+&lt;h2&gt;Vectorization &lt;br&gt;&lt;/h2&gt;
+&lt;p&gt;Now, with the stemmed reviews, it is required to create vectorized versions of the text. Vectorization is the process of converting sentences into vector or array of numbers. &lt;br&gt;
+There are two methods we can go with, count vectorization and TF-IDF vectorization.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Count Vectorization&lt;/strong&gt; &lt;br&gt;
+In the simplest of terms, it is creating an array whose values are the number of occurences of a word in a sentence. Consider the two sentences- I am a human and I enjoy doing human things (two very human-like sentences). &lt;br&gt;
+After stemming both sentences to a very minimal level, if I were to count the number of occurences of each word in the first sentence, I get something like this- &lt;br&gt;
+I- 1, be- 1, a- 1, human- 1.&lt;br&gt;
+Now, for the next sentence-&lt;br&gt;
+I-1, enjoy- 1, be- 1, human-1, things-1.&lt;br&gt;
+Now, creating a list of all words in two sentences- {I, be, enjoy, a, human, things}. &lt;br&gt;
+Creating an array where the words are the columns and the sentences are the rows, we get something like this-&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;array([[1, 1, 0, 0, 1, 0],&lt;br&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;[1, 1, 1, 0, 1, 1] ]&lt;/p&gt;
+&lt;p&gt;This is the count vectorizer equivalent of the two sentences.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TF-IDF Vectorization&lt;/strong&gt; &lt;br&gt;
+It is a combination of two concepts- TF (Term Frequency) and IDF (Inverse Document Frequency). &lt;br&gt; 
+Term frequency is as the name suggests, the frequency of a word occuring in that document. So, it is the ratio of the number of occurences of the word in the document by the total number of words in the document.&lt;br&gt;
+Inverse document frequency is the log base 10 of the ratio of number of documents by the number of documents that the word appears in. The idea behind this is to find words that are more important compared to others.&lt;br&gt; 
+&lt;img src="images/IDF-Formula.png" alt="IDF formula" title="IDF formula" /&gt; &lt;br&gt;
+So, if a word occurs in all the documents, it is not really an important word.&lt;br&gt;
+In this part, I generate the TF-IDF version of the whole review dataset to understand the method and see the output that is generated by it. 
+Since TF-IDF and Count vectorization both use similar concepts and generate similar output format, I decided to check the TF-IDF version.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[10]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[15]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.feature_extraction.text&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TfidfVectorizer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;CountVectorizer&lt;/span&gt;
@@ -1814,7 +2251,7 @@ Since TF-IDF and Count vectorization both use similar concepts and generate simi
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[32]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[16]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;islice&lt;/span&gt;
@@ -1851,7 +2288,7 @@ Since TF-IDF and Count vectorization both use similar concepts and generate simi
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[17]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;textfeatures&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toarray&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1867,7 +2304,7 @@ Since TF-IDF and Count vectorization both use similar concepts and generate simi
 
 &lt;div class="output_area"&gt;
 
-    &lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+    &lt;div class="prompt output_prompt"&gt;Out[17]:&lt;/div&gt;
 
 
 
@@ -2296,11 +2733,12 @@ Since TF-IDF and Count vectorization both use similar concepts and generate simi
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[13]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[18]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;text_vect_df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;textfeatures&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toarray&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sbstem_vectorizer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vocabulary_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;text_vect_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;#text_vect_df[&amp;#39;product&amp;#39;].unique()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
     &lt;/div&gt;
@@ -2313,7 +2751,7 @@ Since TF-IDF and Count vectorization both use similar concepts and generate simi
 
 &lt;div class="output_area"&gt;
 
-    &lt;div class="prompt output_prompt"&gt;Out[13]:&lt;/div&gt;
+    &lt;div class="prompt output_prompt"&gt;Out[18]:&lt;/div&gt;
 
 
 
@@ -2735,15 +3173,15 @@ Since TF-IDF and Count vectorization both use similar concepts and generate simi
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Basic sentiment analysis using NLTK.
-Using 3 sentences of our own, we use NLTK to identify which sentence are positive, negative or neutral. This can be done by the 'compound' value in the polarity score.&lt;/p&gt;
+&lt;h3&gt;Basic sentiment analysis using NLTK.&lt;br&gt;&lt;/h3&gt;
+&lt;p&gt;Using 3 sentences of my own, I use NLTK library to identify which sentence are positive, negative or neutral. This can be done by the 'compound' value in the polarity score.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[14]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[19]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;nltk.sentiment.vader&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SentimentIntensityAnalyzer&lt;/span&gt;
@@ -2799,7 +3237,7 @@ negative - {&amp;#39;neg&amp;#39;: 0.0, &amp;#39;neu&amp;#39;: 1.0, &amp;#39;pos
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[15]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[20]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dataset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sentiment_df&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;text_stem&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
@@ -2846,7 +3284,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 
 &lt;div class="output_area"&gt;
 
-    &lt;div class="prompt output_prompt"&gt;Out[15]:&lt;/div&gt;
+    &lt;div class="prompt output_prompt"&gt;Out[20]:&lt;/div&gt;
 
 
 
@@ -2877,7 +3315,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;this product far disappoint . my children love...&lt;/td&gt;
+      &lt;td&gt;this product far disappoint . my children love use i like abil monitor control content see eas .&lt;/td&gt;
       &lt;td&gt;Positive&lt;/td&gt;
       &lt;td&gt;0.6124&lt;/td&gt;
     &lt;/tr&gt;
@@ -2889,19 +3327,19 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;inexpens tablet use learn , step nabi . he thr...&lt;/td&gt;
+      &lt;td&gt;inexpens tablet use learn , step nabi . he thrill , learn skype alreadi ...&lt;/td&gt;
       &lt;td&gt;Positive&lt;/td&gt;
       &lt;td&gt;0.3612&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;i ve fire hd 8 two week i love . this tablet g...&lt;/td&gt;
+      &lt;td&gt;i ve fire hd 8 two week i love . this tablet great value.w prime member tablet shine . i love abl easili access prime content well movi download watch laterthi 1280/800 screen realli nice look nice crisp bright infact brighter ipad pro cost $ 900 base model . the build fire insan awesom run 7.7mm thick smooth glossi feel back realli amaz hold like futurist tab ur hand .&lt;/td&gt;
       &lt;td&gt;Positive&lt;/td&gt;
       &lt;td&gt;0.9790&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;i bought grand daughter come visit . i set use...&lt;/td&gt;
+      &lt;td&gt;i bought grand daughter come visit . i set user , enter age name amazon make sure access site content appropri age . simpl love capabl . i also bought instal 64gig sd card give littl tablet plenti storag . for price i think tablet best one . you spend hundr dollar addit speed capac come basic tablet everyth peopl ever need fraction cost .&lt;/td&gt;
       &lt;td&gt;Positive&lt;/td&gt;
       &lt;td&gt;0.9371&lt;/td&gt;
     &lt;/tr&gt;
@@ -2918,13 +3356,78 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[16]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[21]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;boxenplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sentiment_coeff&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dataset&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[21]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x1fc2e7c9390&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_png output_subarea "&gt;
+&lt;img src="data:image/png;base64,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
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;So, after using the sentiment analyzer available in NLTK, the positive review seems more logical- higher sentiment coefficient for these reviews, whereas the sentiment coefficient seems more neutral for negative reviews. But, there is also the way categorization of these reviews is done may shed some light here. Reviews with 3 or 2 stars are now negative reviews, whereas the actual review might not be that negative.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3&gt;Preparing for model &lt;br&gt;&lt;/h3&gt;
+&lt;p&gt;Let's start with the data preparation for creating a logistic regression model. We will start by splitting the whole data into 2 parts for training and testing with 70-30 split.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[22]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dataset&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;text_stem&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dataset&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
-&lt;span class="n"&gt;x_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_test_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;random_state&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;x_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_test_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;random_state&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
     &lt;/div&gt;
@@ -2942,7 +3445,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[17]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[23]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;tfidf_vectorizer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TfidfVectorizer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -2961,7 +3464,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[21]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[24]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;logreg_params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;penalty&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;l1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;l2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;
@@ -2996,6 +3499,8 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
   &amp;#34;the number of iterations.&amp;#34;, ConvergenceWarning)
 C:\Users\saumy\Anaconda3\lib\site-packages\sklearn\svm\base.py:922: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
   &amp;#34;the number of iterations.&amp;#34;, ConvergenceWarning)
+C:\Users\saumy\Anaconda3\lib\site-packages\sklearn\svm\base.py:922: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  &amp;#34;the number of iterations.&amp;#34;, ConvergenceWarning)
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3018,7 +3523,7 @@ Best C: 0.1
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[22]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[25]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;logreg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;LogisticRegression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c_value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;penalty&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pen_value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;liblinear&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -3031,9 +3536,24 @@ Best C: 0.1
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3&gt;F1 score and Confusion Matrix &lt;br&gt;&lt;/h3&gt;
+&lt;p&gt;In two-class classification algorithms, model evaluation is done by calculating metrics such as precision, recall and F1 score.
+Starting with the basics, in a two- class supervised classification algorithm, the data can be categorized in either the correct class or the incorrect class. If it is classified in the incorrect class, it would lead to an error. Depending upon the targeted and predicted class, it can be classified as a &lt;strong&gt;Type-I error&lt;/strong&gt; or a &lt;strong&gt;Type-II error&lt;/strong&gt;. &lt;br&gt;
+&lt;img src="images/Precisionrecall.png" alt="PR" title="Precision- Recall basics" /&gt; &lt;br&gt;
+The diagram gives a pretty good picture of the classification metrics. Type-I error is also known as False Positive, while Type-II error is also known as False Negative.&lt;br&gt;
+&lt;em&gt;Precision&lt;/em&gt; is ratio of True Positive and actual results- that is True Positive and False Positive, while &lt;em&gt;Recall&lt;/em&gt; is ratio of True Positive and predicted results- that is True Positive and False Negative. &lt;em&gt;Accuracy&lt;/em&gt; is the average of True Positive and True Negative.&lt;br&gt;
+F1 Score is the harmonic mean of Precision and Recall. It calculates in such a way that both the metrics are given equal weightage, so there is no need to sacrifice one metric over the other.&lt;br&gt;
+Confusion matrix is a plot similar to the diagram above, with the counts in each predicted category.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[23]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[26]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Recall Score: &lt;/span&gt;&lt;span class="si"&gt;{:.2f}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;recall_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_pred&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pos_label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Positive&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
@@ -3078,7 +3598,7 @@ Accuracy Score: 0.94
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[24]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[27]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cnf_matrix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;confusion_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_pred&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -3099,7 +3619,7 @@ Accuracy Score: 0.94
 
 &lt;div class="output_area"&gt;
 
-    &lt;div class="prompt output_prompt"&gt;Out[24]:&lt;/div&gt;
+    &lt;div class="prompt output_prompt"&gt;Out[27]:&lt;/div&gt;
 
 
 
@@ -3118,7 +3638,7 @@ Accuracy Score: 0.94
 
 
 &lt;div class="output_png output_subarea "&gt;
-&lt;img src="data:image/png;base64,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
+&lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAAEKCAYAAAACS67iAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDIuMi4yLCBodHRwOi8vbWF0cGxvdGxpYi5vcmcvhp/UCwAAGylJREFUeJzt3XmcVXX9x/HXe2agAAUGfiwKKCiomYnikrlFakhpQaalLS6R/DTcSv2FS4umPzVNzVwSRNRSETckLQlJUgsQFVOJFFxBTE1wC4yZ4fP74x7wijN3Lj/nzr3z5f3kcR7c8z3b9/AY3vc73/M95ygiMDOztq+q3BUwM7OW4UA3M0uEA93MLBEOdDOzRDjQzcwS4UA3M0uEA93MLBEOdDOzRDjQzcwSUVPuCjRlRZ1vYbUPe2/V6nJXwSpQt07V+qj76LDjcUVnzsp5l3/k45WCW+hmZomo2Ba6mVmrUttv3zrQzcwAqqrLXYOPzIFuZgagiuwWXy8OdDMzcJeLmVky3EI3M0uEW+hmZolwC93MLBEe5WJmlgh3uZiZJcJdLmZmiXAL3cwsEQ50M7NEVPuiqJlZGtyHbmaWCHe5mJklwi10M7NEuIVuZpYIt9DNzBLhW//NzBLhLhczs0S4y8XMLBFuoZuZJcKBbmaWCF8UNTNLhPvQzcwS4S4XM7NEuIVuZpYGOdDNzNLgQDczS4SqHOhmZklIoYXe9i/rmpm1AElFT0Xs6/uS5kt6StLNkj4uaYCkOZIWSrpFUvts3Y9l84uy5f3z9nNaVv60pP2bO64D3cyMlgt0SX2AE4CdI2I7oBo4FLgAuCQiBgHLgVHZJqOA5RExELgkWw9J22bbfRIYDlwpqeDdTw50MzMArcfUvBqgg6QaoCPwCrAPcFu2/HpgZPZ5RDZPtnxf5b41RgCTIuI/EfE8sAjYtdBBHehmZrRcCz0iXgYuAl4iF+RvAY8Cb0ZEfbbaEqBP9rkPsDjbtj5bv3t+eSPbNMqBbmYGVFVVFT1JGi3pkbxp9Jr9SKol17oeAGwKdAK+0MghY80mTSxrqrxJHuViZsb6jXKJiHHAuCYW7wc8HxGvZ/u9A9gd6CqpJmuF9wWWZusvAfoBS7Iumi7AsrzyNfK3aZRb6GZm0JJ96C8Bu0nqmPWF7wv8HbgfODhb5wjgruzz1GyebPmfIiKy8kOzUTADgEHAw4UO7Ba6mRktNw49IuZIug14DKgH5pFrzd8DTJJ0TlY2IdtkAvAbSYvItcwPzfYzX9Jkcl8G9cCYiGgoeA65L4LKs6KuQitmZfXeqtXlroJVoG6dqj9yGvc46paiM+f1iV+vyLuQ3EI3M8O3/puZJSOFW/8d6GZmONDNzJLhQDczS4QD3cwsFW0/zx3oZmaQu/W/rXOgm5nhLhdrIT8983QeeGAm3bp157Ypv1tbfvONv+GWm2+kurqGvfb+LCedfOraZa+8spSvfvlAjvneGA4/alRju7U27isH7EfHTp2orqqiurqGiTfeypk//AEvvfg8AO+88w4bb7wxN0y6k4dn/5UrL7uYuvo62tW047iTTmHnXXcr8xm0MW0/zx3oleBLI7/C17/xTX50+ti1ZXMfns3M+//E5Dum0r59e5a98cYHtrnogvPYY6+9Wruq1squuPo6utbWrp0/54KL136+7OIL6LTRxgB06dqVC395JT169OTZRQs5aczR/G7azNaubpvmFnoBkrYh9wjJPuQe+bgUmBoRC0p1zLZqp513YenLSz5Qdustkzhq1NG0b98egG7du69ddv+M++jbtx8dOnRo1Xpa5YgIZkyfxuVXXwvA1ttsu3bZFlsOZNWq/7Bq1aq1Pz/WvBQCvSRXAST9EJhE7peYh4G52eebJY0ttK3lvPjCC8x79BG+fdjXGHXkt5j/5JMArFyxgonXjue/vzemzDW0UpPEiWO+y5HfOJgpt0/+wLLHH3uUbt2602+z/h/a7v4Zf2SrrT/hMF9PLflO0XIpVQt9FPDJiKjLL5R0MTAfOL9Ex01GQ0MDb7/9NjfcdAvzn3qS/znlJO6+9z6uuuJXfOvbR9KxY6dyV9FK7OqJN9KjR0+WLXuDE4/9Lpv334Idd9oZgOnT7uHzw7/4oW2ee3YhV152MZdeMb61q9vmpfAsl1KN01lN7k0d69okW9ao/LeAXHtNU8+O3zD06tWLfff7PJLY7lPbU6Uqli9fzlNPPsGlF1/IF4ftw42/vYEJ48cx6abflru6VgI9evQEoFu37nz2c/vy9/lPAFBfX8/MP93HfsM++BKc1179J2NPPoEfnX0efftt1ur1bevcQm/aScAMSQt5/514mwEDgeOa2ij/LSAb+uNzh+6zHw8/PIedd/00L77wPHV1ddTW1nLtDTeuXefXV/yKjh07cug3vlXGmloprFy5gtWrg06dOrFy5QrmzP4r3zn6WADmzpnF5v0H0LNX77Xrv/PO25x8wrEce/z3GbzDkHJVu02r5KAuVkkCPSLulbQVuTdU9yHXf74EmNvcA9o3RGNP/QGPzp3Lm28uZ/99P8sx3zuekQcdxE/PPIODR36Jdu3acfb/np/ED5wVZ9kbbzD25BMAaGioZ9jwA/jMHrlRTff98Q8f6m657ZabWLL4JSaOv4qJ468C4NIrr6Fbt+5YcVL47+UXXFib4hdcWGNa4gUXg069t+jMWXjh8IqMf49DNzMDqhK4KOpANzMjjS4XB7qZGW6hm5klwy10M7NEpDCKzIFuZoZb6GZmyfALLszMEuEWuplZItyHbmaWiATy3IFuZgZuoZuZJSOBPHegm5mB7xQ1M0uGu1zMzBKRQJ470M3MwC10M7NkJJDnDnQzM/BFUTOzZLjLxcwsESkEett/vJiZWQuQip+a35e6SrpN0j8kLZD0GUndJE2XtDD7uzZbV5Iuk7RI0hOShuTt54hs/YWSjmjuuA50MzNyLfRipyL8Erg3IrYBBgMLgLHAjIgYBMzI5gG+AAzKptHAVVl9ugE/AT4N7Ar8ZM2XQFMc6GZmtFwLXVJnYG9gAkBErIqIN4ERwPXZatcDI7PPI4AbImc20FXSJsD+wPSIWBYRy4HpwPBCx3agm5mRG+VS7CRptKRH8qbRebvaAngdmChpnqRrJHUCekXEKwDZ3z2z9fsAi/O2X5KVNVXeJF8UNTMDqtbjomhEjAPGNbG4BhgCHB8RcyT9kve7VxrT2IGjQHmT3EI3M6NFL4ouAZZExJxs/jZyAf9q1pVC9vdreev3y9u+L7C0QHmTmgx0SZ0LTc2ekplZG9JSF0Uj4p/AYklbZ0X7An8HpgJrRqocAdyVfZ4KHJ6NdtkNeCvrkpkGDJNUm10MHZaVNalQl8t8PtzsXzMfwGYFz8rMrA1p4RtFjwdulNQeeA44ilwDerKkUcBLwCHZur8HvggsAlZk6xIRyyT9DJibrXd2RCwrdNAmAz0i+jW1zMwsNS15639EPA7s3MiifRtZN4AxTeznWuDaYo9bVB+6pEMlnZ597itpp2IPYGbWFmg9/lSqZgNd0uXA54BvZ0UrgF+XslJmZq2tSsVPlaqYYYu7R8QQSfNgbb9O+xLXy8ysVaXwLJdiAr1OUhXZ+EdJ3YHVJa2VmVkrSyDPiwr0K4DbgR6SzgK+BpxV0lqZmbWy9bmxqFI1G+gRcYOkR4H9sqJDIuKp0lbLzKx1bUgvuKgG6sh1u/juUjNLTgIN9KJGuZwB3AxsSu7W05sknVbqipmZtaYqqeipUhXTQv8WsFNErACQdC7wKHBeKStmZtaaKjemi1dMoL+4zno15G5lNTNLRtLDFiVdQq7PfAUwX9K0bH4Y8FDrVM/MrHUkcE20YAt9zUiW+cA9eeWzS1cdM7PySHqUS0RMaM2KmJmVU9JdLmtI2hI4F9gW+Pia8ojYqoT1MjNrVQk00IsaU34dMJHcReAvAJOBSSWsk5lZq2upF1yUUzGB3jEipgFExLMRcSa5py+amSVD6zFVqmKGLf5Hua+kZyUdA7zM+2+rNjNLQnUCfS7FBPr3gY2AE8j1pXcBvlPKSpmZtbZK7kopVjEP51rz5up3eP8lF2ZmSUkgzwveWHQn2TPQGxMRB5WkRmZmZVDJz2gpVqEW+uWtVgszszJLIM8L3lg0ozUrsq4Uvi2t5fXZ88RyV8Eq0Mp5H739uUH0oZuZbQiqHehmZmlIYNRi8YEu6WMR8Z9SVsbMrFxSCPRi3li0q6QngYXZ/GBJvyp5zczMWtGGcuv/ZcCBwBsAEfE3fOu/mSWmSsVPlaqYLpeqiHhxnW+lhhLVx8ysLCq44V20YgJ9saRdgZBUDRwPPFPaapmZta6aBBK9mEA/lly3y2bAq8B9WZmZWTISyPOinuXyGnBoK9TFzKxsUriZsZg3Fo2nkWe6RMToktTIzKwMEsjzorpc7sv7/HHgK8Di0lTHzKw8Knn0SrGK6XK5JX9e0m+A6SWrkZlZGWwoL7hY1wBg85auiJlZOSWQ50X1oS/n/T70KmAZMLaUlTIza22q6LeFFqfgnaLZu0QHAz2yqTYitoiIya1ROTOz1tLSd4pKqpY0T9Ld2fwASXMkLZR0i6T2WfnHsvlF2fL+efs4LSt/WtL+zZ5DoYUREcCdEdGQTU2+wcjMrC0rwa3/JwIL8uYvAC6JiEHAcmBUVj4KWB4RA4FLsvWQtC25IeOfBIYDV2Y3dzZ9DkVU6mFJQ4o+BTOzNqglH84lqS9wAHBNNi9gH+C2bJXrgZHZ5xHZPNnyfbP1RwCTIuI/EfE8sAjYtdBxC71TtCYi6oE9gaMlPQv8GxC5xrtD3sySUV1M87Z4lwL/A2yczXcH3swyFWAJ0Cf73IdsKHhE1Et6K1u/DzA7b5/52zSq0EXRh4EhvP8tYmaWrPW5U1TSaCD/5spxETEuW3Yg8FpEPCpp6JpNGtlNNLOs0DaNKhToAoiIZwvtwMwsBeszbDEL73FNLN4D+LKkL5K7GbMzuRZ717yej77A0mz9JUA/YImkGqALudGEa8rXyN+mUYUCvYekHxQ4oYsL7djMrC1pqVv/I+I04LTcPjUUOCUivinpVuBgYBJwBHBXtsnUbH5WtvxPERGSpgI3SboY2BQYRK7npEmFAr0a2IjGm/1mZkmpKn3U/RCYJOkcYB4wISufAPxG0iJyLfNDASJivqTJwN+BemBMRBR8F0WhQH8lIs7+iCdgZtYmlOLhXBExE5iZfX6ORkapRMR7wCFNbH8ucG6xx2u2D93MbENQk8C9/4UCfd9Wq4WZWZkl/fjciFjWmhUxMyunDeIFF2ZmG4IE8tyBbmYGxT0HpdI50M3McJeLmVkyHOhmZolo+3HuQDczA3xR1MwsGcU857zSOdDNzPAoFzOzZPiiqJlZItzlYmaWCHe5mJklwi10M7NEtP04d6CbmQFQ7Ra6mVkaEshzB7qZGYAS6HRxoJuZ4Ra6mVkyqtxCNzNLg1voZmaJ8K3/ZmaJqGr7ee5ANzMDj3IxM0tGAj0uDvRK9Pbbb3PWj89k0aJnkMRZP/tfZtz3R/48837atWtH336bcfY559G5c+dyV9Va2JjDhnLUQbsjiYl3/IXLb5oJwLGHfpZjvr439Q2ruffBpzjjl3cBcMp3hnHkiM/QsHo1J//8Nu6btQCAz+/+CS469WCqq6q4bspfuWji9DKdUdvhFrqVxM/PO5c99tyLX1x6GXWrVrHyvffY7TN7cMJJJ1NTU8Mlv7iQCeOv5vsnn1ruqloL2nbLTTjqoN3Z69sXsqqugalXfI8/PDSfPj27cuDQT7HL185jVV09PWo3AmCbLXpzyP5DGHLwuWzSowu///VxfGrk2QBcOvZrHHDs5bz86ps8dOOp3P3nJ/nHc/8s5+lVvBT60FN4YmRS3n33XR59dC5f+erBALRr357OnTuz+x57UlOT+/7dfvAOvPaq/3OmZpsBvXn4yRdY+V4dDQ2refDRRYz43GBGH7IXF02czqq6egBeX/4uAAcO3Z5bpz3Gqrp6Xlz6Bs8u/he7bNefXbbrz7OL/8ULL79BXX0Dt057jAOHbl/OU2sTqqSip0rV6oEu6ajWPmZbsmTxYmpru/HjM07ja18dyU9/fAYrVqz4wDpT7ridPfbau0w1tFKZ/+xS9hwykG5dOtHh4+0Yvucn6du7loGb92SPHbfkgRtO4Y/XnMhO224GQJ8eXVjyz+Vrt3/5teVs2rMLm/bswpJX88pfXU6fHl1a/XzaGq3HVKnK0UI/q6kFkkZLekTSIxPGj2vNOlWMhoZ6/rHg7xxy6GFMvn0KHTp04Npr3v+3GH/1VVTXVHPAgV8uYy2tFJ5+/lV+cd107r7qOKZeMYYnnnmZ+voGaqqrqO3ckb0Pv4jTL5nCb3/+ndwGjbQUIxrvC45SVz4BKbTQS9KHLumJphYBvZraLiLGAeMA3qvfMH8Ge/XqTa9evdl++8EAfH7Y8LWBPnXKnTzw55mMm3BdEg/jtw+7fsosrp8yC4CzjvsSL7/6JlsP6M2UGX8D4JH5L7J6dfBftRvx8mtv0rd37dpt+/Ss5ZXX3wKgb6+88l61LM3KrWkp/I8qVQu9F3A48KVGpjdKdMwk/FePHvTq3ZsXnn8OgDmzZ7HFllvylwcfYOKE8fzy8qvo0KFDmWtppbLmgme/3rWM2Gcwk+99hN/NfIKhu24FwMDNetK+XQ3/Wv4u98x8gkP2H0L7djVsvml3Bm7Wg7lPvcAj819k4GY92HzT7rSrqeaQ/Ydwz8ym2li2VgJ9LqUa5XI3sFFEPL7uAkkzS3TMZIw9/Uec9sNTqKuro2/ffpx9znl84+sHs6puFcd8N3cJ4lODB/Ojn5xd5ppaS7v5ou/SrWsn6uobOOn8ybz5zkqunzKLq3/6TR659XRW1TXw3R//BoAFz/2T2/84j3m3n0F9w2pOOn8yq1cHEHz/gsn87soxVFeJ6++azQKPcGlWJXelFEsRldmzsaF2uVhhtbscV+4qWAVaOe/yj5zGc597q+jM2WWLLhWZ/h6HbmYGFd2VUiwHupkZadwp6huLzMzIjQItdiq8H/WTdL+kBZLmSzoxK+8mabqkhdnftVm5JF0maZGkJyQNydvXEdn6CyUd0dw5ONDNzGjRQS71wMkR8QlgN2CMpG2BscCMiBgEzMjmAb4ADMqm0cBVkPsCAH4CfBrYFfjJmi+BpjjQzcwASUVPhUTEKxHxWPb5HWAB0AcYAVyfrXY9MDL7PAK4IXJmA10lbQLsD0yPiGURsRyYDgwvdGz3oZuZUZrH50rqD+wIzAF6RcQrkAt9ST2z1foAi/M2W5KVNVXeJLfQzcxYvy6X/MeUZNPoD+1P2gi4HTgpIt5u5tDrigLlTXIL3cwM1mvYYv5jShrdldSOXJjfGBF3ZMWvStoka51vAryWlS8B+uVt3hdYmpUPXad8ZqF6uYVuZkZu2GKxfwruJ9fJPgFYEBEX5y2aCqwZqXIEcFde+eHZaJfdgLeyrplpwDBJtdnF0GFZWZPcQjczo0X70PcAvg08KWnN409OB84HJksaBbwEHJIt+z3wRWARsAI4CiAilkn6GTA3W+/siFhW6MAOdDMzWi7QI+Ihmu7A2beR9QMY08S+rgWuLfbYDnQzM9K4U9SBbmZGaYYttjYHupkZSTyby4FuZgYkkegOdDMz0njBhQPdzIwkGugOdDMzIIlEd6CbmeFhi2ZmyUigC92BbmYGSfS4ONDNzIBmX1zRFjjQzcxwl4uZWTISyHMHupkZkESiO9DNzPCwRTOzZLgP3cwsEVUOdDOzVLT9RHegm5nhLhczs2QkkOcOdDMzcAvdzCwZvvXfzCwRbT/OHehmZoC7XMzMkuE7Rc3MUtH289yBbmYGSeS5A93MDKAqgU50B7qZGWlcFK0qdwXMzKxluIVuZkYaLXQHupkZHrZoZpYMt9DNzBLhQDczS4S7XMzMEuEWuplZIhLIcwe6mRmQRKI70M3MSOPWf0VEuetgzZA0OiLGlbseVln8c2Hr8q3/bcPoclfAKpJ/LuwDHOhmZolwoJuZJcKB3ja4n9Qa458L+wBfFDUzS4Rb6GZmiXCgVzhJwyU9LWmRpLHlro+Vn6RrJb0m6aly18UqiwO9gkmqBq4AvgBsCxwmadvy1soqwHXA8HJXwiqPA72y7QosiojnImIVMAkYUeY6WZlFxAPAsnLXwyqPA72y9QEW580vycrMzD7EgV7ZGnu4hIclmVmjHOiVbQnQL2++L7C0THUxswrnQK9sc4FBkgZIag8cCkwtc53MrEI50CtYRNQDxwHTgAXA5IiYX95aWblJuhmYBWwtaYmkUeWuk1UG3ylqZpYIt9DNzBLhQDczS4QD3cwsEQ50M7NEONDNzBLhQLeCJDVIelzSU5JuldTxI+xrqKS7s89fLvT0SEldJX3v/3GMn0o6pdjydda5TtLB63Gs/n7ioVUSB7o1Z2VE7BAR2wGrgGPyFypnvX+OImJqRJxfYJWuwHoHutmGzIFu6+NBYGDWMl0g6UrgMaCfpGGSZkl6LGvJbwRrn+f+D0kPAQet2ZGkIyVdnn3uJelOSX/Lpt2B84Ets98OLszWO1XSXElPSDorb19nZM+Mvw/YurmTkHR0tp+/Sbp9nd869pP0oKRnJB2YrV8t6cK8Y//3R/2HNCsFB7oVRVINueeyP5kVbQ3cEBE7Av8GzgT2i4ghwCPADyR9HBgPfAnYC+jdxO4vA/4cEYOBIcB8YCzwbPbbwamShgGDyD1SeAdgJ0l7S9qJ3CMRdiT3hbFLEadzR0Tskh1vAZB/p2V/4LPAAcCvs3MYBbwVEbtk+z9a0oAijmPWqmrKXQGreB0kPZ59fhCYAGwKvBgRs7Py3ci9gOMvkgDak7s1fRvg+YhYCCDpt8DoRo6xD3A4QEQ0AG9Jql1nnWHZNC+b34hcwG8M3BkRK7JjFPOsm+0knUOuW2cjco9WWGNyRKwGFkp6LjuHYcD2ef3rXbJjP1PEscxajQPdmrMyInbIL8hC+9/5RcD0iDhsnfV2oOUe9yvgvIi4ep1jnPT/OMZ1wMiI+JukI4GhecvW3Vdkxz4+IvKDH0n91/O4ZiXlLhdrCbOBPSQNBJDUUdJWwD+AAZK2zNY7rIntZwDHZttWS+oMvEOu9b3GNOA7eX3zfST1BB4AviKpg6SNyXXvNGdj4BVJ7YBvrrPsEElVWZ23AJ7Ojn1stj6StpLUqYjjmLUqt9DtI4uI17OW7s2SPpYVnxkRz0gaDdwj6V/AQ8B2jeziRGBc9tTABuDYiJgl6S/ZsMA/ZP3onwBmZb8hvAt8KyIek3QL8DjwIrluoeb8CJiTrf8kH/zieBr4M9ALOCYi3pN0Dbm+9ceUO/jrwMji/nXMWo+ftmhmlgh3uZiZJcKBbmaWCAe6mVkiHOhmZolwoJuZJcKBbmaWCAe6mVkiHOhmZon4P7Eo4Lqq36M5AAAAAElFTkSuQmCC
 "
 &gt;
 &lt;/div&gt;
@@ -3131,7 +3651,7 @@ Accuracy Score: 0.94
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[25]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[28]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;logreg_params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;penalty&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;l1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;l2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;
@@ -3163,8 +3683,8 @@ Accuracy Score: 0.94
 
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Best Penalty: l2
-Best C: 10
+&lt;pre&gt;Best Penalty: l1
+Best C: 1
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3175,7 +3695,7 @@ Best C: 10
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[26]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[29]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;logreg_tf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;LogisticRegression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c_value_tf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;penalty&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pen_value_tf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;liblinear&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -3190,7 +3710,7 @@ Best C: 10
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[27]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[30]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Recall Score: &lt;/span&gt;&lt;span class="si"&gt;{:.2f}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;recall_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_pred_tf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pos_label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Positive&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
@@ -3214,7 +3734,7 @@ Best C: 10
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Recall Score: 0.99
-Precision Score: 0.95
+Precision Score: 0.94
 F1 Score: 0.97
 Accuracy Score: 0.94
 &lt;/pre&gt;
@@ -3227,7 +3747,7 @@ Accuracy Score: 0.94
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[28]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[31]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cnf_matrix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;confusion_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_pred_tf&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -3248,7 +3768,7 @@ Accuracy Score: 0.94
 
 &lt;div class="output_area"&gt;
 
-    &lt;div class="prompt output_prompt"&gt;Out[28]:&lt;/div&gt;
+    &lt;div class="prompt output_prompt"&gt;Out[31]:&lt;/div&gt;
 
 
 
@@ -3267,7 +3787,7 @@ Accuracy Score: 0.94
 
 
 &lt;div class="output_png output_subarea "&gt;
-&lt;img src="data:image/png;base64,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
+&lt;img src="data:image/png;base64,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
 "
 &gt;
 &lt;/div&gt;
@@ -3286,9 +3806,19 @@ Accuracy Score: 0.94
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2&gt;Final Words&lt;br&gt;&lt;/h2&gt;
+&lt;p&gt;So, we walked through various parts of a data science projects- data cleaning, exploration, data visualization, data manipulation for creating a model. We also looked at various techniques used for text analytics- vectorization and sentiment analysis.&lt;br&gt;
+Looking back, I would like to explore this dataset more using similar machine learning techniques, especially in the model part. There are several other classification algorithms such as Random Forest and Naive Bayes which I would like to read upon and possibly implement with the dataset to compare the different algorithms. There is also a possibility of including neural network systems which can be checked upon as well.&lt;br&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
  
 
-
+&lt;/body&gt;
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
