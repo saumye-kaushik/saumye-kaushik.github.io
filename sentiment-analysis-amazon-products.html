@@ -20,16 +20,27 @@
 
 
 
+    <link rel="shortcut icon" href="siteimages/favicon.png" type="image/x-icon">
+    <link rel="icon" href="siteimages/favicon.png" type="image/x-icon">
 
 
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#810b0b">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#810b0b">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#810b0b">
 
 <meta name="author" content="Saumye Kaushik" />
-<meta name="description" content="In this project, I will be analysing reviews that were given to Amazon Products. This dataset contains around 34000 reviews of various Amazon products such as Fire tablet, Fire stick. Along with it, there is also the rating given by the user and if the user recommends this product or not." />
+<meta name="description" content="In this project, I will be analysing reviews that were given to Amazon Products. This dataset contains around 41000 reviews of various Amazon products such as Fire tablet, Fire stick. Along with it, there is also the rating given by the user and if the user recommends this product or not." />
 <meta name="keywords" content="python, sentiment analysis">
 
 <meta property="og:site_name" content="Saumye's Blog"/>
 <meta property="og:title" content="Sentiment Analysis of Reviews for Amazon Products"/>
-<meta property="og:description" content="In this project, I will be analysing reviews that were given to Amazon Products. This dataset contains around 34000 reviews of various Amazon products such as Fire tablet, Fire stick. Along with it, there is also the rating given by the user and if the user recommends this product or not."/>
+<meta property="og:description" content="In this project, I will be analysing reviews that were given to Amazon Products. This dataset contains around 41000 reviews of various Amazon products such as Fire tablet, Fire stick. Along with it, there is also the rating given by the user and if the user recommends this product or not."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./sentiment-analysis-amazon-products.html"/>
 <meta property="og:type" content="article"/>
@@ -39,7 +50,7 @@
 <meta property="article:section" content="Project Details"/>
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="sentiment analysis"/>
-<meta property="og:image" content="">
+<meta property="og:image" content="siteimages/siteicon.png">
 
   <title>Saumye's Blog &ndash; Sentiment Analysis of Reviews for Amazon Products</title>
 
@@ -48,21 +59,27 @@
   <aside>
     <div>
       <a href=".">
-        <img src="./theme/img/profile.png" alt="" title="">
+        <img src="siteimages/siteicon.png" alt="Saumye Kaushik" title="Saumye Kaushik">
       </a>
-      <h1><a href="."></a></h1>
+      <h1><a href=".">Saumye Kaushik</a></h1>
 
 
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about-me.html#about-me">About Me</a></li>
+
+        </ul>
+      </nav>
 
       <ul class="social">
           <li>
-            <a  class="sc-LinkedIn" href="https://www.linkedin.com/in/saumye-kaushik/" target="_blank">
-            <i class="fab fa-LinkedIn">
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/saumye-kaushik/" target="_blank">
+            <i class="fab fa-linkedin">
             </i>
           </a></li>
           <li>
-            <a  class="sc-Github" href="https://github.com/saumye-kaushik" target="_blank">
-            <i class="fab fa-Github">
+            <a  class="sc-github" href="https://github.com/saumye-kaushik" target="_blank">
+            <i class="fab fa-github">
             </i>
           </a></li>
       </ul>
@@ -72,6 +89,15 @@
   </aside>
   <main>
 
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="/categories.html">CATEGORIES</a>
+      <a href="/tags.html">TAGS</a>
+
+
+    </nav>
 
 <article class="single">
   <header>
@@ -1238,10 +1264,10 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project, I will be analysing reviews that were given to Amazon Products. This dataset contains around 34000 reviews of various Amazon products such as Fire tablet, Fire stick. Along with it, there is also the rating given by the user and if the user recommends this product or not.</p>
+<p>In this project, I will be analysing reviews that were given to Amazon Products. This dataset contains around 41000 reviews of various Amazon products such as Fire tablet, Fire stick. Along with it, there is also the rating given by the user and if the user recommends this product or not.</p>
 <p><strong>Aim</strong>: Use the textual reviews of Amazon Products to predict ratings, while experimenting various parts of textual analysis.<br>
 I will be using the text column in the dataset to predict the rating given by the user, whether it is positive or negative. This is of course under the assumption that the review given by the user matches the rating given. Hopefully, the reviews here are not something like this one!<br></p>
-<p><img src="themes/images/The-Contradictory.png" alt="Great review but one star?!" title="Contradictory review" /> <br>
+<p><img src="images/The-Contradictory.png" alt="Great review but one star?!" title="Contradictory review" /> <br>
 So, before I start, the idea is to change the <em>rating</em> from numbers to positive-negative or use the <em>doRecommend</em> flag and predict this rating using the reviews for each product.<br></p>
 <p><strong>Dataset</strong>: <a href="https://www.kaggle.com/datafiniti/consumer-reviews-of-amazon-products/kernels">https://www.kaggle.com/datafiniti/consumer-reviews-of-amazon-products/kernels</a> <br>
 So, let's start!</p>
@@ -2299,7 +2325,7 @@ Creating an array where the words are the columns and the sentences are the rows
 It is a combination of two concepts- TF (Term Frequency) and IDF (Inverse Document Frequency). <br> 
 Term frequency is as the name suggests, the frequency of a word occuring in that document. So, it is the ratio of the number of occurences of the word in the document by the total number of words in the document.<br>
 Inverse document frequency is the log base 10 of the ratio of number of documents by the number of documents that the word appears in. The idea behind this is to find words that are more important compared to others.<br> 
-<img src="themes/images/IDF-Formula.png" alt="IDF formula" title="IDF formula" /> <br>
+<img src="images/IDF-Formula.png" alt="IDF formula" title="IDF formula" /> <br>
 So, if a word occurs in all the documents, it is not really an important word.<br>
 In this part, I generate the TF-IDF version of the whole review dataset to understand the method and see the output that is generated by it. 
 Since TF-IDF and Count vectorization both use similar concepts and generate similar output format, I decided to check the TF-IDF version.</li>
@@ -3625,7 +3651,7 @@ Best C: 0.1
 <h3>F1 score and Confusion Matrix <br></h3>
 <p>In two-class classification algorithms, model evaluation is done by calculating metrics such as precision, recall and F1 score.
 Starting with the basics, in a two- class supervised classification algorithm, the data can be categorized in either the correct class or the incorrect class. If it is classified in the incorrect class, it would lead to an error. Depending upon the targeted and predicted class, it can be classified as a <strong>Type-I error</strong> or a <strong>Type-II error</strong>. <br>
-<img src="themes/images/Precisionrecall.png" alt="PR" title="Precision- Recall basics" /> <br>
+<img src="images/Precisionrecall.png" alt="PR" title="Precision- Recall basics" /> <br>
 The diagram gives a pretty good picture of the classification metrics. Type-I error is also known as False Positive, while Type-II error is also known as False Negative.<br>
 <em>Precision</em> is ratio of True Positive and actual results- that is True Positive and False Positive, while <em>Recall</em> is ratio of True Positive and predicted results- that is True Positive and False Negative. <em>Accuracy</em> is the average of True Positive and True Negative.<br>
 F1 Score is the harmonic mean of Precision and Recall. It calculates in such a way that both the metrics are given equal weightage, so there is no need to sacrifice one metric over the other.<br>
@@ -3946,7 +3972,7 @@ Looking back, I would like to explore this dataset more using similar machine le
 </article>
 
     <footer>
-<p>&copy;  </p>
+<p>&copy; Saumye Kaushik 2019</p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
 </p>    </footer>
   </main>
@@ -3960,7 +3986,7 @@ Looking back, I would like to explore this dataset more using similar machine le
   "@type" : "Blog",
   "name": " Saumye's Blog ",
   "url" : ".",
-  "image": "",
+  "image": "siteimages/siteicon.png",
   "description": ""
 }
 </script>
